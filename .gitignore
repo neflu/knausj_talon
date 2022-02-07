@@ -4,6 +4,5 @@ __pycache__
 # Locally generated
 /settings
 .vscode/settings.json
-.gitignore
-/modes/modes.talon
-/modes/dictation_mode.talon
+modes/modes.talon
+modes/dictation_mode.talon
