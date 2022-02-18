@@ -88,7 +88,7 @@ wheel gaze: user.mouse_gaze_scroll()
 wheel gaze here:
     user.mouse_move_center_active_window()
     user.mouse_gaze_scroll()
-wheel stop: user.mouse_scroll_stop()
+(wheel|we'll) stop: user.mouse_scroll_stop()
 wheel stop here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_stop()
