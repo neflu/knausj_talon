@@ -1,5 +1,4 @@
 import os
-
 from talon import (
     Module,
     actions,
