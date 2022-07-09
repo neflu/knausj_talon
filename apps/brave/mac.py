@@ -1,16 +1,38 @@
-from talon import Context, actions
+from talon import Context, actions, ui
+from talon.mac import applescript
 
 ctx = Context()
 ctx.matches = r"""
 os: mac
-app: microsoft_edge
+app: brave
 """
 ctx.tags = ["browser", "user.tabs"]
 
 
+def brave_app():
+    return ui.apps(bundle="com.brave.Browser")[0]
+
+
 @ctx.action_class("browser")
 class BrowserActions:
-    # action(browser.address):
+    def address() -> str:
+        try:
+            window = brave_app().windows()[0]
+        except IndexError:
+            return ""
+        try:
+            web_area = window.element.children.find_one(AXRole="AXWebArea")
+            address = web_area.AXURL
+        except (ui.UIErr, AttributeError):
+            address = applescript.run(
+                """
+                tell application id "com.brave.Browser"
+                    if not (exists (window 1)) then return ""
+                    return window 1's active tab's URL
+                end tell
+            """
+            )
+        return address
 
     def bookmark():
         actions.key("cmd-d")
@@ -35,10 +57,10 @@ class BrowserActions:
         actions.key("cmd-n")
 
     def go_back():
-        actions.key("cmd-left")
+        actions.key("cmd-[")
 
     def go_forward():
-        actions.key("cmd-right")
+        actions.key("cmd-]")
 
     def go_home():
         actions.key("cmd-shift-h")
@@ -50,7 +72,7 @@ class BrowserActions:
         actions.key("cmd-r")
 
     def reload_hard():
-        actions.key("shift-cmd-r")
+        actions.key("cmd-shift-r")
         # action(browser.reload_hardest):
 
     def show_clear_cache():
@@ -69,13 +91,3 @@ class BrowserActions:
 
     def toggle_dev_tools():
         actions.key("cmd-alt-i")
-
-
-@ctx.action_class("user")
-class UserActions:
-    def tab_jump(number: int):
-        if number < 9:
-            actions.key(f"cmd-{number}")
-
-    def tab_final():
-        actions.key("cmd-9")

@@ -3,30 +3,14 @@ from talon import Context, Module, actions, app
 ctx = Context()
 mod = Module()
 
-mod.apps.chrome = "app.name: Google Chrome"
-mod.apps.chrome = """
-os: windows
-and app.exe: chrome.exe
-"""
-mod.apps.chrome = """
+mod.apps.brave = "app.name: Brave Browser"
+# TODO: Add other OS application identifiers
+mod.apps.brave = """
 os: mac
-and app.bundle: com.google.Chrome
-"""
-mod.apps.chrome = """
-os: mac
-and app.bundle: org.chromium.Chromium
-"""
-mod.apps.chrome = """
-os: linux
-app.exe: chrome
-app.exe: chromium-browser
-"""
-mod.apps.chrome = """
-os: linux
-and app.name: Google-chrome
+and app.bundle: com.brave.Browser
 """
 ctx.matches = r"""
-app: chrome
+app: brave
 """
 
 
