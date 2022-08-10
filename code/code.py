@@ -24,6 +24,9 @@ extension_lang_map = {
     ".pl": "perl",
     ".ps1": "powershell",
     ".py": "python",
+# ADDED FOR JUPYTER NOTEBOOKS
+    ".ipynb": "python",
+# ADDED ^
     ".r": "r",
     ".rb": "ruby",
     ".s": "assembly",
@@ -36,6 +39,11 @@ extension_lang_map = {
     ".vim": "vimscript",
     ".vimrc": "vimscript",
 }
+
+# added to make talon stop whining. the equivalents for gui functions are in my backup but not my main dir
+# something seems off...
+# they do appear in other user repos, but not in main repo? needs further investigation
+mod.list("code_functions", desc="List of functions for active language")
 
 @ctx.action_class("code")
 class code_actions:

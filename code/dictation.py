@@ -407,9 +407,17 @@ class Actions:
         return after
 
 # Use the dictation formatter in dictation mode.
+
+# 2022-07-09 14:17:25 Tried hanging below as per slack to improve dictaion accuracy
+# didn't work, so added a hacky fix - blacklist windowsTerminal and relevant apps
 dictation_ctx = Context()
 dictation_ctx.matches = r"""
 mode: dictation
+and not app.exe: WindowsTerminal.exe
+and not app: vscode
+and not title: /REPL/
+and not title: /ipynb/i
+and not title: /localhost:8888/i
 """
 
 @dictation_ctx.action_class("main")

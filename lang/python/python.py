@@ -9,6 +9,9 @@ mode: user.python
 mode: user.auto_lang
 and code.language: python
 """
+# ADDED TO SHUT UP TALON
+mod.tag("code_functions_gui", desc="No idea what this does, added to stop talon whining about warnings.")
+
 ctx.lists["user.code_functions"] = {
     "enumerate": "enumerate",
     "integer": "int",
@@ -133,6 +136,17 @@ ctx.lists["user.python_exception"] = {
     for exception in exception_list
 }
 
+# BELOW ADDED 6/27 TO PREVENT WARNING IN LOG
+@mod.action_class
+class Actions:
+    def code_insert_function(text: str, selection: str):
+        """Here's the damn docstring."""
+        if selection:
+            text = text + "({})".format(selection)
+        else:
+            text = text + "()"
+        actions.user.paste(text)
+        actions.edit.left()
 
 @ctx.action_class("user")
 class UserActions:

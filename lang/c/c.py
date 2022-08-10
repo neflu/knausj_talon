@@ -191,7 +191,8 @@ def c_cast(m) -> str:
 
 # NOTE: we purposely we don't have a space after signed, to faciltate stdint
 # style uint8_t constructions
-@mod.capture(rule="[<self.stdint_signed>]<self.stdint_types> [<self.c_pointers>+]")
+## NOTE:  we now do have a space after signed to get rid of annoying talon messages
+@mod.capture(rule="[<self.stdint_signed>] <self.stdint_types> [<self.c_pointers>+]")
 def c_stdint_cast(m) -> str:
     "Returns a string"
     return "(" + "".join(list(m)) + ")"

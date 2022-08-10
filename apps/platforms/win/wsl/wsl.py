@@ -21,7 +21,7 @@ ctx = Context()
 ctx.matches = r"""
 app: ubuntu
 app: windows_terminal
-and win.title: /Ubuntu/ 
+and win.title: /Ubuntu/
 """
 directories_to_remap = {}
 directories_to_exclude = {}
@@ -31,7 +31,8 @@ termination_error = 'The Windows Subsystem for Linux instance has terminated.'
 restart_message = 'wsl path detection is offline, you need to restart your wsl session, e.g. "wsl --terminate <distro>; wsl"'
 path_detection_disable_title="Talon - WSL path detection disabled"
 path_detection_disable_notice = 'WSL path detection has been disabled because new WSL sessions cannot be started. See the log for more detail.'
-path_detection_disabled = False
+# 2022-07-08 20:00:08  change to true from false to silence error messages
+path_detection_disabled = True
 
 user_path = os.path.expanduser("~")
 if app.platform == "windows":
@@ -148,7 +149,7 @@ def run_wslpath(args, in_path):
 # and https://github.com/microsoft/WSL/issues/5318.
 #
 # Once the WSL distro is hung, every attempt to use it results in many repeated log messages like these:
-# 
+#
 # 2021-10-15 11:15:49 WARNING [watchdog] "talon.windows.ui._on_event" @30.0s (stalled)
 # 2021-10-15 11:15:49 WARNING [watchdog] "user.knausj_talon.code.file_manager.win_event_handler"
 #
@@ -156,7 +157,7 @@ def run_wslpath(args, in_path):
 # focus shifts to a wsl context or the current path changes. This gets tiresome if you don't want to restart
 # wsl immediately (because your existing sessions are still running and you want to finish working before
 # restarting wsl).
-# 
+#
 # So, wsl path detection is disabled when this condition is first detected. The user
 # must then re-enable the feature once the underlying problem has been resolved. This can be done by
 # using the 'weasel reset path detection' voice command or simply reloading this file.

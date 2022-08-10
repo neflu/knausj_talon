@@ -7,7 +7,8 @@ mode: dictation
 # Everything here should call `auto_insert()` (instead of `insert()`), to preserve the state to correctly auto-capitalize/auto-space.
 # (Talonscript string literals implicitly call `auto_insert`, so there's no need to wrap those)
 <user.raw_prose>: auto_insert(raw_prose)
-cap: user.dictation_format_cap()
+#2022-07-09 14:15:06 changed cap to capitalize as it was clashing w/ alphabet
+capitalize: user.dictation_format_cap()
 # Hyphenated variants are for Dragon.
 (no cap | no-caps): user.dictation_format_no_cap()
 (no space | no-space): user.dictation_format_no_space()
