@@ -7,3 +7,4 @@ __pycache__
 .vscode/settings.json
 modes/modes.talon
 modes/dictation_mode.talon
+*.bak
