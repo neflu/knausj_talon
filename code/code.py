@@ -30,6 +30,7 @@ language_extensions = {
     "php": "php",
     # 'powershell': 'ps1',
     "python": "py",
+    "ipython": "ipynb",
     "protobuf": "proto",
     "r": "r",
     # 'racket': 'rkt',
