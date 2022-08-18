@@ -68,11 +68,13 @@ wrap switch: user.vscode("editor.action.toggleWordWrap")
 zen switch: user.vscode("workbench.action.toggleZenMode")
 
 # File Commands
-file hunt [<user.text>]:
+# changed from file to phil
+phil hunt [<user.text>]:
     user.vscode("workbench.action.quickOpen")
     sleep(50ms)
     insert(text or "")
-file hunt (pace | paste):
+# changed from file to phil
+phil hunt (pace | paste):
   user.vscode("workbench.action.quickOpen")
   sleep(50ms)
   edit.paste()
