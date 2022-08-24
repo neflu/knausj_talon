@@ -7,6 +7,8 @@ ctx = Context()
 ctx.matches = r"""
 tag: user.python
 """
+
+
 ctx.lists["user.code_common_function"] = {
     "enumerate": "enumerate",
     "integer": "int",
@@ -19,6 +21,98 @@ ctx.lists["user.code_common_function"] = {
     "string": "str",
     "update": "update",
 }
+
+mod.list("python_packages", desc="Shorthand names for common python packages")
+
+# capture to add . after. <pkg name> <function for package?
+# pandas: ['a','b','c'....] Talon will probably not accept multiple vals.
+ctx.lists["user.python_packages"] = {
+    "ree": "re", #re
+    "regex": "regex", #regex
+    "flow": "tf", #tensorflow
+    "pex": "px", #plotly express
+    "dos": "pd", #pandas. tried daas =-> dos
+    "plot lib": "plt",
+    "plot lee": "plotly",
+}
+
+@mod.capture(rule="{user.python_packages}")
+def return_txt(m) -> str:
+    """Returns a function name"""
+    txt = m.python_packages + "."
+    return txt
+
+
+mod.list("pandas_functions", desc="Shorthand names for common python packages")
+
+ctx.lists["user.pandas_functions"] = {
+    "frame": "df_",
+    "make new": "DataFrame()",
+    "named": "['']",
+    "multi": "[['','']]",
+    "loke": "loc['']",
+    "eye loke": "iloc[,]",
+    "read comma": "read_csv()",
+    "read web": "read_html()",
+    "read jason": "read_json()",
+    "read clip": "read_clip()",
+    "head": "head()",
+    "tail": "tail()",
+    "describe": "describe()",
+    "info": "info()",
+    "right comma": "to_csv()",
+    "right excel": "to_excel()",
+    "right jason": "to_json()",
+    "right clip": "to_clip()",
+    "find all": "findall",
+    "string contains": ".str.contains(r'',regex=True)",
+    "num unique": "nunique()",
+    "num unique": "nunique()",
+    "drop nah rows": "dropna()",
+    "drop nah cols": "dropna(axis=1)",
+    "is nah": "isna()",
+    "fill nah": "fillna()",
+    "calls": "columns",
+    "replace": "replace(,)",
+    "rename": "rename()",
+    "set indy": "set_index()",
+    "index": "index",
+    "sort val": "sort_values()",
+    "series": "Series()",
+    "apply col": "apply()",
+    "apply row": "apply(, axis=1)",
+    "append rows": "append()",
+    "concat cols": "concat([, ], axis=1)",
+    "concat rows": "join(, on=, how='')",
+}
+
+@mod.capture(rule="{user.pandas_functions}")
+def text(m) -> str:
+    """Returns a pandas function"""
+    return m.pandas_functions
+
+#* REGEX
+
+mod.list("ree_functions", desc="Functions for the re module in python")
+
+# capture to add . after. <pkg name> <function for package?
+# pandas: ['a','b','c'....] Talon will probably not accept multiple vals.
+ctx.lists["user.ree_functions"] = {
+    "ree": "re", #re
+    "regex": "regex", #regex
+    "flow": "tf", #tensorflow
+    "pex": "px", #plotly express
+    "dos": "pd", #pandas. tried daas =-> dos
+    "plot lib": "plt",
+    "plot lee": "plotly",
+}
+
+@mod.capture(rule="{user.ree_functions}")
+def text(m) -> str:
+    """Returns a function name for re module."""
+    return m.ree_functions
+
+
 
 """a set of fields used in python docstrings that will follow the
 reStructuredText format"""

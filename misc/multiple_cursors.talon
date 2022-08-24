@@ -9,3 +9,8 @@ cursor more: user.multi_cursor_select_more_occurrences()
 cursor skip: user.multi_cursor_skip_occurrence()
 cursor all: user.multi_cursor_select_all_occurrences()
 cursor lines: user.multi_cursor_add_to_line_ends()
+cursor here:
+    key(ctrl:down)
+    mouse_click(0)
+    key(ctrl:up)
+
